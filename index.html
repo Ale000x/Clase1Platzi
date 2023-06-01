@@ -8,14 +8,34 @@
 </head>
 <body>
     <script src="https://unpkg.com/vue@next"></script>
-    <div id="app">{{ text }}</div>
+    <div id="app"> </div>
     <script>
        const vm= Vue.createApp({
             data(){
                 return {
-                    text:"Hola Vue"
+                  counter: 0,
+                 
                 };
-            }
+            },
+            methods:{
+
+                increment(){
+                    this.counter++;
+                },
+                decrease(){
+
+                    this.counter--;
+                }
+            },
+           
+            template: `<div>
+                
+                <button v-on:click="increment">Aumentar!</button>
+                <button v-on:click="decrease">Quitar!</button>
+                <p> {{counter}}</p>
+                
+                </div>`
+
         }).mount("#app");
 
         console.log(vm);
