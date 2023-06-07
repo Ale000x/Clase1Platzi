@@ -13,28 +13,44 @@
        const vm= Vue.createApp({
             data(){
                 return {
-                  text: "Hola"
+                  text: "Puerta Cerrada",
+                  open:false,
+                  title: "Welcome!"
+
                  
                 };
             },
-            methods:{
+            watch:{
 
-                input(e){
-                   this.text=e.target.value;
-                },
+              open(value){
+                if(value){
+                    this.text="Puerta Abierta";
+                }
+                else{
+                    this.text = "Puerta Cerrada";
+                }
+              }
                 
             },
            
-            template: `<p>{{text}}</p>/
-                <input type="text" v-on:change="input"/>
-                <input type="text" v-on:input="input" 
-                                v-bind:value="text"/>
-                `
+            template: `
+            <div> <h1>{{title}}</h1></div>
+            <img :src="open ? 'open.jpeg' : 'close.jpg'" style="width: 197px; height: 256px;">
+            <button class="btn1" @click="open = !open">{{open ? "Cerrar" : "Abrir"}}
+            
+            
+            `
         }).mount("#app");
 
         console.log(vm);
     </script>
-    
+    <style>
+        .btn1{
+            display: block;
+            padding: 20px;
+            
+        }
+    </style>
   
 </body>
 </html>
