@@ -15,7 +15,10 @@
                 return {
                   text: "Puerta Cerrada",
                   open:false,
-                  title: "Welcome!"
+                  title: "Welcome!",
+                  styles: {
+                    backgroundColor: "#eca1a6"
+                  }
 
                  
                 };
@@ -25,16 +28,18 @@
               open(value){
                 if(value){
                     this.text="Puerta Abierta";
+                    this.styles.backgroundColor ="#b5e7a0"
                 }
                 else{
                     this.text = "Puerta Cerrada";
+                    this.styles.backgroundColor ="#eca1a6"
                 }
               }
                 
             },
            
             template: `
-            <div class="contenedor">
+            <div class="contenedor" :style="styles">
             <div> <h1>{{title}}</h1></div>
             <img :src="open ? 'open.jpeg' : 'close.jpg'" style="width: 197px; height: 256px;">
             <button class="btn1" @click="open = !open">{{open ? "Cerrar" : "Abrir"}}
