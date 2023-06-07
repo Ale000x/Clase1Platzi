@@ -8,19 +8,70 @@
 </head>
 <body>
     <script src="https://unpkg.com/vue@next"></script>
-    <div id="app">{{ text }}</div>
+    <div id="app"> </div>
     <script>
        const vm= Vue.createApp({
             data(){
                 return {
-                    text:"Hola Vue"
+                 open:false,
+                  title: "Welcome!",
+                
+
+                 
                 };
-            }
+            },
+            watch:{
+
+              open(value){
+                if(value){
+                    this.text="Puerta Abierta";
+                   
+                }
+                else{
+                    this.text = "Puerta Cerrada";
+                 
+                }
+              }
+                
+            },
+           
+            template: `
+            <div class="contenedor" :class="{'open' : open, 'close' : !open}">
+            <div> <h1>{{title}}</h1></div>
+            <img :src="open ? 'open.jpeg' : 'close.jpg'" style="width: 197px; height: 256px;">
+            <button class="btn1" @click="open = !open">{{open ? "Cerrar" : "Abrir"}}
+            </div>
+            
+            `
         }).mount("#app");
 
         console.log(vm);
     </script>
-    
+    <style>
+        .btn1{
+            display: block;
+            padding: 20px;
+            margin: 10px;
+            
+        }
+
+        .contenedor{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .close{
+            background-color: red;
+        }
+        .open{
+            background-color: green;
+        }
+    </style>
   
 </body>
 </html>
