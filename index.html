@@ -8,70 +8,296 @@
 </head>
 <body>
     <script src="https://unpkg.com/vue@next"></script>
-    <div id="app"> </div>
+    <div id="app"></div>
     <script>
-       const vm= Vue.createApp({
-            data(){
+        const vm = Vue.createApp({
+            data() {
                 return {
-                 open:false,
-                  title: "Welcome!",
+                    text: "Inicia Sesión en Twitter",
+                    placeholdertext:"Teléfono, correo electrónico o nombre",
+                    open: false,
+                    username: "",
+                    posts: [{
+                        title:"Titulo1",
+                        description: "LOREM BLA BLA..."
+                    },
+                    {
+                        title:"Titulo2",
+                        description: "LOREM BLA BLA..."
+                    },
+                    {
+                        title:"Titulo3",
+                        description: "LOREM BLA BLA..."
+                    },
+                    {
+                        title:"Titulo4",
+                        description: "LOREM BLA BLA..."
+                    },
+                    {
+                        title:"Titulo5",
+                        description: "LOREM BLA BLA..."
+                    },
+                    {
+                        title:"Titulo6",
+                        description: "LOREM BLA BLA..."
+                    },
                 
-
-                 
+                ]
                 };
             },
-            watch:{
-
-              open(value){
-                if(value){
-                    this.text="Puerta Abierta";
-                   
+            watch: {
+                open(value) {
+                    if (value) {
+                        this.text = "Cierra sesión";
+                    } else {
+                        this.text = "Accede a tu cuenta";
+                        this.username = "";
+                    }
                 }
-                else{
-                    this.text = "Puerta Cerrada";
-                 
-                }
-              }
-                
             },
-           
+            computed: {
+                label() {
+                    return this.open ? "Salir" : "Acceder";
+                },
+                styles() {
+                    return this.open ? ['open'] : ['closed'];
+                }
+            },
             template: `
-            <div class="contenedor" :class="{'open' : open, 'close' : !open}">
-            <div> <h1>{{title}}</h1></div>
-            <img :src="open ? 'open.jpeg' : 'close.jpg'" style="width: 197px; height: 256px;">
-            <button class="btn1" @click="open = !open">{{open ? "Cerrar" : "Abrir"}}
+           
+
+                <div class="containeropen" v-if="open">
+                    <p class="name">{{username}} <img class="verificadoicon" src="iconverificado.png"></p>
+                    <p class="username">@{{username}}</p>
+                    <div class="list">
+                        <div v-for="(item, i) in posts"  class="item">
+                            <div class="title">{{item.title}}</div>
+                            <p>{{item.description}}</p>
+                        </div>    
+                    </div>
+                    <button @click="open = !open">
+                    <div v-if="!open">Acceder</div>
+                    <div v-else>Salir</div>
+                </button>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="c-closed" v-else>
+
+                <div class="container" :class="styles">
+                    <img  class="Logos" src="logo-twitter.png">
+                    <h2>{{ text }}</h2>
+                    <button  @click="open = !open" class="buttonin"><img class="Logos" src="logo-google.png">Iniciar sesión con Google</button>
+                    <button  @click="open = !open" class="buttonin btnapple"><img class="Logos" src="apple-logo.png">Iniciar sesión con Apple</button>
+
+                    <div class="containero">
+                        <div class="line"></div>
+                        <p class="character"> O </p>
+                    <div class="line"></div>
+                    
+                </div>
+
+
+                <input class="inputtw" type="text" v-bind:placeholder="placeholdertext" v-model="username" />    
+                <button  @click="open = !open"class="buttonnext">Siguiente</button>         
+                <button class="buttonin btnapple">¿Olvidaste tu contraseña?</button>
+
+                          
+                </div>
+
+                <div class="registro">
+                    <p>¿No tienes una cuenta?  <a>Regístrate</a></p>
+                    
+                </div>
+
+                <button @click="open = !open">
+                    <div v-if="!open">Acceder</div>
+                    <div v-else>Salir</div>
+                </button>
+               
             </div>
-            
             `
         }).mount("#app");
-
-        console.log(vm);
     </script>
     <style>
-        .btn1{
-            display: block;
-            padding: 20px;
-            margin: 10px;
+
+        .containeropen{
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .username{
+            color: grey;
+            text-transform: capitalize;
+            margin-top: 0px;
+            
             
         }
+        .verificadoicon{
+            width: 100%;
+            max-width: 15px;
+            max-width: 15px;
+            margin-left: 5px;
+        }
+        .name{
+            font-weight: 700;
+            text-transform: capitalize;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+           
+        }
 
-        .contenedor{
-            display:flex;
+
+         .registro{
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 265px;
+         }
+
+         .registro p a{
+            color: rgb(28, 183, 255);
+            font-size: 12px;
+         }
+         .registro p{
+            
+            font-size: 12px;
+         }
+
+        .buttonnext{
+            border: solid 1px black;
+            width: 100%;
+            max-width: 265px;
+            border-radius: 20px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+        .inputtw{
+            width: 100%;
+            max-width: 265px;
+            min-height: 30px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            border: solid 1px rgba(0, 0, 0, 0.178);
+        }
+
+         .containero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .line {
+        flex-grow: 1;
+        height: 1px;
+        background-color: rgba(0, 0, 0, 0.356);
+    }
+
+    .character {
+        margin: 20px 10px;
+        color: black;
+        font-weight: 500;
+        
+    }
+        
+        .containero{
+            width: 100%;
+            max-width: 265px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-height: 20px;
+        }
+
+       
+        .buttonin{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: solid 1px rgba(0, 0, 0, 0.178);
+            border-radius: 20px;
+            width: 265px;
+            margin: 20px 0px 0px 0pc;
+        }
+
+        .btnapple{
+            font-weight: bold;
+        }
+        html, body {
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #app, .container  {
+            display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            height: 100vh;
-            margin: 0px;
-            padding: 0px;
+            width: 100%;
+            max-width: 600px;
+            height: 100%;
+            margin: 0 auto;
+        }
+        .c-closed{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
         }
 
-        .close{
-            background-color: red;
+        .c-closed div{
+            margin: 10px;
         }
-        .open{
-            background-color: green;
+      
+        button {
+            margin-top: 24px;
+            border: none;
+            background-color: white;
+            padding: 8px 24px;
+            border-radius: 12px;
+        }
+        .closed {
+            background-color: #ffffff;
+        }
+        .open {
+            background-color: #b5e7a0;
+        }
+
+        .list{
+            display: flex;
+            flex-direction: column;
+        }
+        .item{
+            border: 1px solid black;
+        }
+        .title{
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .Logos{
+            width: 100%;
+            max-width: 25px;
+            max-height: 25px;
+            display: inline;
+            margin: 0px 10px 0px 0px;
         }
     </style>
-  
 </body>
 </html>
