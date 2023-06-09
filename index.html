@@ -67,12 +67,12 @@
            
 
                 <div class="containeropen" v-if="open">
-
-                    <div class="container90">
-                        <div>
-                            <p class="name">{{username}} <img class="verificadoicon" src="iconverificado.png"></p>
-                            <p class="username">134.8 mil Tweets</p>
-                        </div>
+                       
+                        <div class="container90">
+                            <div class="datausertweets">
+                                <p class="name">{{username}} <img class="verificadoicon" src="iconverificado.png"></p>
+                                <p class="username">134.8 mil Tweets</p>
+                            </div>
                         <div>
                             <button @click="open = !open">
                             <div v-if="!open">Acceder</div>
@@ -80,12 +80,12 @@
                             </button>
                         </div>
 
-                     </div>
+                    </div>
                      
                      <div class="bannercontainer">
                         <img class="banner" src="stars.jpg"/>
-                    </div>    
-
+                    
+                    </div>
                     <div class="headerapp"> 
                         <div class=infouser>
                             <div class="containerinfo">
@@ -192,6 +192,7 @@
             width: 90%!important;
             display: flex;
             justify-content: space-between;
+            margin: 0 auto;
            
         }
 
@@ -200,6 +201,7 @@
         .containeropen{
             width: 100%;
             max-width: 100%;
+            height: 100vh;
            
         
         }
