@@ -67,18 +67,39 @@
            
 
                 <div class="containeropen" v-if="open">
-                    <p class="name">{{username}} <img class="verificadoicon" src="iconverificado.png"></p>
-                    <p class="username">@{{username}}</p>
+
+                    <div class="container90">
+                        <div>
+                            <p class="name">{{username}} <img class="verificadoicon" src="iconverificado.png"></p>
+                            <p class="username">@{{username}}</p>
+                        </div>
+                        <div>
+                            <button @click="open = !open">
+                            <div v-if="!open">Acceder</div>
+                            <div v-else>Salir</div>
+                            </button>
+                        </div>
+
+                     </div>
+                     
+                     <div class="bannercontainer">
+                        <img class="banner" src="stars.jpg"/>
+                    </div>    
+
+                    <div class="headerapp"> 
+                        <img class="photouser" src="alex.jpg"/>
+
+                    </div>
+
+
                     <div class="list">
                         <div v-for="(item, i) in posts"  class="item">
                             <div class="title">{{item.title}}</div>
                             <p>{{item.description}}</p>
                         </div>    
                     </div>
-                    <button @click="open = !open">
-                    <div v-if="!open">Acceder</div>
-                    <div v-else>Salir</div>
-                </button>
+                   
+                    
                 </div>
 
 
@@ -133,11 +154,42 @@
         }).mount("#app");
     </script>
     <style>
+        .headerapp{
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            margin: -50px  auto  10px;
+           
+        }
+        .photouser{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            box-shadow: grey 5px 5px 10px;
+        }
+        .bannercontainer{
+            margin: 0px;
+        }
+        .banner{
+            width: 100%;
+            max-height:250px;
+            margin:0px;
+        }
+        .container90{
+            width: 90%!important;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+           
+        }
+
+
 
         .containeropen{
             width: 100%;
             max-width: 100%;
             margin: 0 auto;
+        
         }
         .username{
             color: grey;
